@@ -33,5 +33,5 @@ function getStreetAutocompleteObject() {
     };
 }
 
-$street_select.autocomplete(getStreetAutocompleteObject());
+$street_select.autocompleteajax(getStreetAutocompleteObject());
 ```
