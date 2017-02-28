@@ -35,3 +35,30 @@ function getStreetAutocompleteObject() {
 
 $street_select.autocompleteajax(getStreetAutocompleteObject());
 ```
+
+```html
+<div class="input-field col s12 m12 l4">
+  <div style="position: relative">
+      <div class="preloader-wrapper small js-street-preloader" style="width: 20px; height: 20px; position: absolute; right: 0; margin-top: 15px">
+          <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                  <div class="circle"></div>
+              </div><div class="gap-patch">
+                  <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <input id="street"
+         type="text"
+         autocomplete="off"
+         name="street"
+         placeholder="Enter something..."
+         data-url="/ajax/url-get-data"
+         class="js-street-select">
+  <label id="street_label" for="street" style="width: 100%">Street</label>
+  <input type="hidden" class="autocomplete-id" name="autocomplete-id" value="">
+</div>
+```
