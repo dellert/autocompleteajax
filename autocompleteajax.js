@@ -138,5 +138,3 @@ $.fn.autocompleteajax = function (options) {
         });
     });
 };
-
-}); // End of $(document).ready
