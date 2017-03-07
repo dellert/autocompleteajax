@@ -63,7 +63,6 @@ $.fn.autocompleteajax = function (options) {
 
                         // Replace custom prop name for the value of the input
                         for (var prop in dataCopy) {
-                            console.log(prop);
                             if (dataCopy[prop].toString().indexOf("%s") > -1) {
                                 dataCopy[prop] = dataCopy[prop].replace("%s", encodeURIComponent($input.val()));
                             }
