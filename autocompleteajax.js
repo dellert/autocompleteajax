@@ -56,13 +56,22 @@ $.fn.autocompleteajax = function (options) {
 
                 timer =  setTimeout(function() {
                     if(!$.isEmptyObject(options.ajax)) {
+
+                        // Copy ajax data object
+                        var dataCopy = Object.assign({}, options.ajax.data);
+
+
+                        // Replace custom prop name for the value of the input
+                        for (var prop in dataCopy) {
+                            if (dataCopy[prop].toString().indexOf("%s") > -1) {
+                                dataCopy[prop] = dataCopy[prop].replace("%s", encodeURIComponent($input.val()));
+                            }
+                        }
+
                         $.ajax({
                             url: options.ajax.url,
                             method: options.ajax.method,
-                            data: {
-                                data: $input.val(),
-                                ajax_data: options.ajax.data
-                            },
+                            data: dataCopy,
                             dataType: options.ajax.dataType,
                             error: options.ajax.error,
                             beforeSend: function(jqXHR, settings) {
@@ -71,12 +80,13 @@ $.fn.autocompleteajax = function (options) {
                             success: function(res) {
                                 data = res;
 
-                                // If wanna work with response result
+                                // If wanna work with response result and get the updated version
                                 if(options.callback != null) {
-                                    options.callback(res);
+                                    data = options.callback(res) || data;
                                 }
                             }
                         });
+
                     }
 
                     // Capture Enter
@@ -98,7 +108,7 @@ $.fn.autocompleteajax = function (options) {
                         var autocompleteOption = $('<li data-id="'+ value.id +'"></li>');
 
                         if(!!value.image) {
-                            autocompleteOption.append('<img src="'+ value.image +'" class="right circle"><span>'+ value.image +'</span>');
+                            autocompleteOption.append('<img src="'+ value.image +'" class="right circle"><span>'+ value.value +'</span>');
                         } else {
                             autocompleteOption.append('<span>'+ value.value +'</span>');
                         }
