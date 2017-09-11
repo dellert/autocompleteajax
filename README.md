@@ -62,3 +62,15 @@ $street_select.autocompleteajax(getStreetAutocompleteObject());
   <input type="hidden" class="autocomplete-id" name="autocomplete-id" value="">
 </div>
 ```
+
+Ajax response format from server must be like this
+
+```js
+{
+    "status": 200,
+    "data":[{
+        id: 12,
+        value: "value"
+    }]
+}
+```
