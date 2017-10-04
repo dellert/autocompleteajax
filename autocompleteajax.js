@@ -57,16 +57,8 @@ $.fn.autocompleteajax = function (options) {
                 timer =  setTimeout(function() {
                     if(!$.isEmptyObject(options.ajax)) {
 
-                        // Copy ajax data object
-                        var dataCopy = Object.assign({}, options.ajax.data);
-
-
-                        // Replace custom prop name for the value of the input
-                        for (var prop in dataCopy) {
-                            if (dataCopy[prop].toString().indexOf("%s") > -1) {
-                                dataCopy[prop] = dataCopy[prop].replace("%s", encodeURIComponent($input.val()));
-                            }
-                        }
+                        // Set search string
+                        var dataCopy = {'string' : $input.val()};
 
                         $.ajax({
                             url: options.ajax.url,
@@ -102,7 +94,8 @@ $.fn.autocompleteajax = function (options) {
 
             // Check if the input isn't empty
             if (val !== '') {
-                (data) && $.each(data, function(i, value) {
+                var results = data.data;
+                (results) && $.each(results, function(i, value) {
                     if (value.value.toLowerCase().indexOf(val) !== -1 &&
                         value.value.toLowerCase() !== val) {
                         var autocompleteOption = $('<li data-id="'+ value.id +'"></li>');
