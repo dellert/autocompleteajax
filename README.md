@@ -66,12 +66,11 @@ $street_select.autocompleteajax(getStreetAutocompleteObject());
 Ajax response format from server must be like this
 
 ```js
-[{
-    id: 12,
-    value: "value12"
-},
 {
-    id: 13,
-    value: "value13"
-}]
+    "status": 200,
+    "data":[{
+        id: 12,
+        value: "value"
+    }]
+}
 ```
